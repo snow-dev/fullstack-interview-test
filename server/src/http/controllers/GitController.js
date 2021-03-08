@@ -34,12 +34,11 @@ export default class GitController {
 		});
 	}
 	static async getBranches (req, res) {
-	    console.debug("Project controller -> ", req.body);
-	    let branches = await GitService.getBranches();
-			return Promise.resolve({
-				data: branches.data,
-				statusCode: 200,
-				error: false
-			});
+		let branches = await GitService.getBranches();
+		return Promise.resolve({
+			data: branches.data,
+			statusCode: 200,
+			error: false
+		});
 	}
 }

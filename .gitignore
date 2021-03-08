@@ -127,12 +127,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-server/dist-server/
-
-.idea/
-
-server/node_modules/
-server/.idea/
-front/node_modules/
-front/.idea/

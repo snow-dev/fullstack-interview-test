@@ -7,5 +7,6 @@ const router = express.Router();
 router.get('/repository', responseHandler(GitController.getRepository));
 router.get('/commits', responseHandler(GitController.getCommits));
 router.get('/branches', responseHandler(GitController.getBranches));
+router.post('/branchCommits', responseHandler(GitController.branchCommits));
 
 export default router;

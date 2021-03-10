@@ -1,3 +1,4 @@
+import env from './../env' // eslint-disable-line
 
 let config = {};
 

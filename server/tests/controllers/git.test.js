@@ -7,7 +7,7 @@ const expect = chai.expect;
 const request = chai.request;
 
 describe( '/GET Git repository data', () => {
-	it( 'should request respositiry data, return 200 and data', (done) => {
+	it.skip( 'should request respository data, return 200 and data', (done) => {
 		request(app).get('/repository').send().then(response => {
 			// console.debug('Git tests response: ', response.body);
 			expect(response.body.statusCode).to.be.equal(200);
@@ -43,9 +43,9 @@ describe( '/GET Git repository data', () => {
 		});
 	} );
 	
-	it.only( 'should request commits by  branches sha, with 200 status', (done) => {
-		request(app).get('/branchCommits').send({ branch: 'master'}).then(response => {
-			console.debug('Git tests response: ', response.body);
+	it('should request commits by  branches sha, with 200 status', (done) => {
+		request(app).post('/branchCommits').send({ branch: 'master'}).then(response => {
+			// console.debug('Git tests response: ', response.body);
 			expect(response.body.statusCode).to.be.equal(200);
 			expect(response.body.error).to.be.equal(false);
 			// expect(response.body.data.length).to.be.greaterThan(0);

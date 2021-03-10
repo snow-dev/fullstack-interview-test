@@ -13,7 +13,7 @@ export default class GitController {
 		let repository = await GitService.getRepositoryData();
 		
 		return Promise.resolve({
-			data: repository.data.source,
+			data: repository,
 			statusCode: 200,
 			error: false
 		});
@@ -42,6 +42,7 @@ export default class GitController {
 	 */
 	static async getBranches (req, res) {
 		let branches = await GitService.getBranches();
+		
 		return Promise.resolve({
 			data: branches.data,
 			statusCode: 200,

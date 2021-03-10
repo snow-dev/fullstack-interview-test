@@ -1,3 +1,5 @@
+import env from './../../env' // eslint-disable-line
+
 import axios from 'axios';
 
 export default class GitService {
@@ -8,11 +10,10 @@ export default class GitService {
 	static async getRepositoryData() {
 		try {
 			let config = {
-				headers: {
-					Authorization: 'token 7450267ed33cee926b8e03177965083d9712a9af',
-				}
+				Authorization: `token ${process.env.GITHUB_TOKEN}`,
 			}
-			return await axios.get( 'https://api.github.com/repos/snow-dev/fullstack-interview-test', config ).then( response => {
+			
+			return await axios.get( `${process.env.GITHUB_URL}`, config ).then( response => {
 				// console.debug( 'GitService: ', response.data.source );
 				return response;
 			} ).catch( error => {
@@ -30,13 +31,11 @@ export default class GitService {
 	static async getCommits(branch) {
 		try {
 			let config = {
-				headers: {
-					Authorization: 'token 7450267ed33cee926b8e03177965083d9712a9af',
-				}
+				Authorization: `token ${process.env.GITHUB_TOKEN}`,
 			}
 			
-			return await axios.get( `https://api.github.com/repos/snow-dev/fullstack-interview-test/commits?sha=${branch}`, config ).then( response => {
-				// console.debug( 'GitService: ', response.data );
+			return await axios.get( `${process.env.GITHUB_URL}/commits?sha=${branch}`, config ).then( response => {
+				
 				return response.data;
 			} ).catch( error => {
 				return error;
@@ -48,16 +47,12 @@ export default class GitService {
 	
 	static async getParents(sha, commits = []) {
 		let config = {
-			headers: {
-				Authorization: 'token 7450267ed33cee926b8e03177965083d9712a9af',
-			}
+			Authorization: `token ${process.env.GITHUB_TOKEN}`,
 		}
 		// https://api.github.com/repos/snow-dev/fullstack-interview-test/commits\?sha\=master
-		return await axios.get( `https://api.github.com/repos/snow-dev/fullstack-interview-test/commits?sha=${sha}`, config ).then( response => {
+		return await axios.get( `${process.env.GITHUB_URL}/commits?sha=${sha}`, config ).then( response => {
 			if (response.data.parents.length > 0) {
 				commits.push(response.data.commit);
-				// console.debug( 'GitService: ', response.data.parents[0].sha );
-				// console.debug( 'GitService: ', commits );
 				this.getParents(response.data.parents[0].sha, commits)
 			} else {
 				return commits;
@@ -74,13 +69,11 @@ export default class GitService {
 	static async getBranches() {
 		try {
 			let config = {
-				headers: {
-					Authorization: 'token 7450267ed33cee926b8e03177965083d9712a9af',
-				}
+				Authorization: `token ${process.env.GITHUB_TOKEN}`,
 			}
 			
-			return await axios.get( 'https://api.github.com/repos/snow-dev/fullstack-interview-test/branches', config ).then( response => {
-				// console.debug( 'GitService: ', response.data );
+			return await axios.get( `${process.env.GITHUB_URL}/branches`, config ).then( response => {
+				// console.debug( 'GitService: ', response );
 				return response;
 			} ).catch( error => {
 				return error;

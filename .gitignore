@@ -102,7 +102,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+.env.*
 .venv
 env/
 venv/
@@ -131,8 +131,8 @@ dmypy.json
 server/dist-server/
 
 .idea/
-
-server/node_modules/
+node_modules/*
+server/node_modules/*
 server/.idea/
-front/node_modules/
+front/node_modules/*
 front/.idea/

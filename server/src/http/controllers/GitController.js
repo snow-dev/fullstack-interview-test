@@ -52,13 +52,20 @@ export default class GitController {
 	
 	static async branchCommits (req, res) {
 		let commitsBranch = await GitService.getCommits(req.body.branch);
-		
-		// console.debug("Project controller -> ", commitsBranch);
-		
 		return Promise.resolve({
 			data: commitsBranch,
 			statusCode: 200,
 			error: false
 		});
+	}
+	
+	static async commitDetails (req, res) {
+		console.debug("Project controller -> ", req.body);
+	    let details = await GitService.commitDetails(req.body.commitSha);
+			return Promise.resolve({
+				data: details,
+				statusCode: 200,
+				error: false
+			});
 	}
 }

@@ -55,4 +55,17 @@ describe( '/GET Git repository data', () => {
 		});
 	} );
 	
+	it('should request commits details, and get response with 200 status', (done) => {
+		// https://api.github.com/repos/snow-dev/fullstack-interview-test/commits/07efdc21b6397a7160acb51f3b39e53d9ab5d5a0
+		request(app).post('/commitDetails').send({ commitSha: '07efdc21b6397a7160acb51f3b39e53d9ab5d5a0'}).then(response => {
+			// console.debug('Git tests response: ', response.body.data);
+			expect(response.body.statusCode).to.be.equal(200);
+			expect(response.body.error).to.be.equal(false);
+			// expect(response.body.data.length).to.be.greaterThan(0);
+			done();
+		}).catch(err => {
+			done(err);
+		});
+	} );
+	
 } );

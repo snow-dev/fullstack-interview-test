@@ -83,4 +83,19 @@ export default class GitService {
 		}
 	}
 	
+	static async commitDetails(commitSha) {
+		try {
+			let config = { Authorization: `token ${process.env.GITHUB_TOKEN}`};
+			return await axios.get( `${process.env.GITHUB_URL}/commits/${commitSha}`, config ).then( response => {
+				
+				return response.data;
+			} ).catch( error => {
+				return error;
+			} );
+			
+		} catch (err) {
+			throw err;
+		}
+	}
+	
 }
